@@ -1,0 +1,45 @@
+.navStyle{
+       background: #131921;
+    padding: 8px;
+    margin: -8px;
+    color: white;
+}
+.logoStyle{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: monospace;
+    cursor: pointer;
+}
+.logoSty{
+    padding-right: 6px;
+        font-size: 24px;
+        cursor: pointer;
+}
+.locIcon{
+        padding-right: 5px;
+        cursor: pointer;
+}
+.colCenter{
+    display: flex;
+    align-items: center;
+}
+.hello{
+font-size: 14px;
+    color: gainsboro;
+}
+.slideCardDesign{
+        position: absolute;
+    top: 47%;
+    margin-left: 15px;
+}
+.cardheadSty{
+    background: #ffc107;
+    font-weight: 500;
+}
+.cardShadowMain{
+/* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.clickSty{
+    cursor: pointer;
+}

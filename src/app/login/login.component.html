@@ -1,0 +1,100 @@
+<div class="row" style="    margin-top: 12%;    justify-content: center;" *ngIf="!isForget">
+
+    <div class="card cardShadow" style="width: 34%;">
+        <div class="row" style="    justify-content: center;">
+            <div class="col welcome" style="text-align: center;">
+            <div>Welcome to <span style="color: rgb(245, 178, 55);">BB</span> Mart</div>
+
+            </div>
+        </div>
+        <div class="row" style="    width: 83%;
+    margin: auto;">
+            <div class="col-12">
+                <span class="userNameCol">Email</span>
+            </div>
+            
+            <div class="col-12">
+                <input type="text" class="form-control" [(ngModel)]="email">
+            </div>
+            <div class="col-12" *ngIf="isSignUp">
+                <span class="userNameCol">User Name</span>
+            
+            </div>
+            <div class="col-12" *ngIf="isSignUp">
+                <input type="text" class="form-control" [(ngModel)]="userName">
+            </div>
+            <div class="col-12">
+                <span class="userNameCol">Password</span>
+            </div>
+            <div class="col-12">
+                <input type="password" class="form-control" [(ngModel)]="password">
+                <span *ngIf="!isSignUp" (click)="forgotPass()" class="hyperLink">Forgot password</span>
+            </div>
+            <ng-container *ngIf="isSignUp" >
+                <div class="col-12">
+                    <span class="userNameCol">Confirm Password</span>
+                </div>
+                <div class="col-12">
+                    <input type="password" class="form-control" [(ngModel)]="confirmPassword">
+                </div>
+                <div class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
+                    <button class="btn btn-primary" (click)="signUpNewUser()" (window:keypress)="enterLog($event)">Sign up</button>
+                </div>
+            </ng-container>
+            
+            <div *ngIf="!isSignUp" class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
+               <button class="btn btn-primary" (click)="login()" (window:keypress)="enterLog($event)">Login</button>
+            </div>
+            <div *ngIf="!isSignUp" class="col" style="text-align: center;">
+                <span style="color: #7e7e7e;">You don't have an account? <span (click)="signUpWindow()" style="cursor: pointer; text-decoration: underline;color: rgb(10, 10, 227);">SignUp</span> </span>
+            </div>
+            <div *ngIf="isSignUp" class="col" style="text-align: center;">
+                <span style="color: #7e7e7e;">Already you have an account? <span (click)="loginUser()"
+                        style="cursor: pointer; text-decoration: underline;color: rgb(10, 10, 227);">Login</span> </span>
+            </div>
+             
+        </div>
+
+    </div>
+</div>
+
+<div class="row" style="    margin-top: 12%;    justify-content: center;" *ngIf="isForget">
+
+    <div class="card cardShadow" style="width: 34%;">
+        <div class="row" style="    justify-content: center;">
+            <div class="col welcome" style="text-align: center;">
+                <div>Welcome to <span style="color: rgb(245, 178, 55);">BB</span> Mart</div>
+
+            </div>
+        </div>
+        <div class="row" style="    width: 83%;
+    margin: auto;">
+            <div class="col-12">
+                <span class="userNameCol">Email</span>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control" [(ngModel)]="email" >
+                
+
+            </div>
+            <div class="col-12">
+                <span class="userNameCol">OTP</span>
+            </div>
+            <div class="col-12">
+                <input type="password" class="form-control">
+                <span class="hyperLink" (click)="getOtp()" *ngIf="!isGetOtp">Click here to get otp</span>
+                <span *ngIf="isGetOtp">OTP valid only for {{otpSec}} Sec</span>
+                
+            </div>
+            <div class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
+                <button class="btn btn-primary" (click)="submitOtp()" >Submit OTP</button>
+            </div>
+            <div  class="col" style="text-align: center;">
+                <span ><span (click)="isForget=false"
+                        style="cursor: pointer; text-decoration: underline;color: rgb(10, 10, 227);">Back to Login ?</span> </span>
+            </div>
+
+        </div>
+
+    </div>
+</div>

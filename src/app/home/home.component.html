@@ -1,0 +1,174 @@
+<div class="row navStyle">
+    <div class="col">
+        <div class="row" style="padding-top: 5px;">
+            <div class="col-1.5 colCenter" style="width:172px;    padding-left: 10px;">
+                <span> <i class="fa-brands fa-fort-awesome fa-fade logoSty"></i> <span class="logoStyle">
+                        <span style="color: rgb(241, 173, 46);">BB</span>
+                        Mart</span></span>
+
+            </div>
+            <div class="col-1.5" style="width: 170px;">
+                <div class="row">
+                    <div class="col-12">
+                        <span class="hello">Hello, {{userAfterLogin}}</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="locIcon"> <i class="fas fa-location-dot"></i> </span>
+                        <span>Select Your location!</span>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="col-6 colCenter" style="position: relative;
+    top: 10px;">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Product here"
+                        aria-label="Search Product here" aria-describedby="button-addon2">
+                    <button style="margin-left: -2px;" class="btn btn-warning" type="button" id="button-addon2"> <i
+                            class="fas fa-search"></i> </button>
+                </div>
+
+            </div>
+            <div class="col-1.5 colCenter" style="cursor: pointer;">
+                <a  (click)="loginUser()" style="color: white;"><span style="padding-right: 6px;">
+                    <i *ngIf="!showUserName" class="fas fa-right-to-bracket"></i> </span>
+                    <span *ngIf="!showUserName">Hello, Sign in</span>
+                <span *ngIf="showUserName">welcome, {{userAfterLogin}}</span>
+                    </a>
+            </div>
+            <div class="col colCenter" *ngIf="showUserName" style="cursor: pointer;" (click)="loginUser()">
+                <i  class="fas fa-up-right-from-square" style="    padding-right: 5px;"></i> Sign out?
+            </div>
+            <div class="col colCenter" style="cursor: pointer;justify-content: right;">
+                <span> <i style="font-size: 20px;" class="fas fa-cart-shopping"></i> </span>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+<div class="row" *ngIf="!isViewProd">
+    <div class="col-12">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/img/slide_1.jpg" alt="Los Angeles" width="100%" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/slide_2.jpg" alt="Chicago" width="100%" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/slide_1.jpg" alt="New York" width="100%" height="500">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+
+    </div>
+    <div class="col slideCardDesign">
+        <div class="row">
+            <div class="col-4 clickSty" (click)="viewProdList('electronics')">
+                <div class="card cardShadowMain">
+                    <div class="card-header cardheadSty">
+                        <span>Electronics devices for home office</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+<div class="col-6" style="padding-bottom: 10px;">
+    <img src="assets/img/card.jpg" alt="">
+</div>
+<div class="col-6">
+    <img src="assets/img/card_1.jpg" alt="">
+</div>
+<div class="col-6">
+    <img src="assets/img/card_2.jpg" alt="">
+</div>
+<div class="col-6">
+    <img src="assets/img/card_3.jpg" alt="">
+</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 clickSty" (click)="viewProdList('fruits')">
+                <div class="card cardShadowMain">
+                    <div class="card-header cardheadSty">
+                        <span>Flat ₹75 cashback | Fruits & vegetables | BB Fresh</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6" style="padding-bottom: 10px;">
+                                <img src="assets/img/sec_card_4.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img src="assets/img/sec_card_1.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img src="assets/img/sec_card_2.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img src="assets/img/sec_card_3.jpg" alt="">
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 clickSty" (click)="viewProdList('houseHolds')">
+                <div class="card cardShadowMain">
+                    <div class="card-header cardheadSty">
+                        <span>Just launched | BB brands & more</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6" style="padding-bottom: 10px;">
+                                <img src="assets/img/third_card_4.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img src="assets/img/third_card_1.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img src="assets/img/third_card_2.jpg" alt="">
+                            </div>
+                            <div class="col-6">
+                                <img src="assets/img/third_card_3.jpg" alt="">
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="isViewProd" style="    width: 95%;
+    margin: auto;    margin-top: 20px;">
+    <app-product-list [prodtype]="passViewName" [fromPage]="pagename" ></app-product-list>
+</div>

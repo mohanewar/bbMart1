@@ -1,0 +1,74 @@
+<!-- <div class="row" style="    padding-top: 1rem;">
+    <div class="col-1.5" style="padding-left:20px ;">
+        <a href="#" data-target="#sidebar" data-toggle="collapse"><i class="text-dark fa fa-navicon fa-lg py-2 p-1"></i>
+        </a>
+    </div>
+    <div class="col">
+        <span style="font-size: 18px;
+    font-weight: 500;">Product Upload</span>
+    </div>
+    <div class="col-2">
+        <span><i class="fas fa-up-right-from-square" style="    padding-right: 5px;"></i>Logout</span>
+    </div>
+</div>
+<hr> -->
+<div class="row">
+    <div class="col-4 inputSpaceBtm">
+        <label for="prodName">Product Name</label>
+        <input type="text" id="prodName" name="prodName" class="form-control" ngDefaultControl [(ngModel)]="productName">
+    </div>
+    <div class="col-4 inputSpaceBtm">
+        <label for="prodDes">Product Describtion</label>
+        <input type="text" id="prodDes" name="prodDis" class="form-control" ngDefaultControl [(ngModel)]="productDescription">
+    </div>
+    <div class="col-4 inputSpaceBtm">
+        <label for="prodMrp">Product MRP</label>
+        <input type="text" id="prodMrp" name="prodMrp" class="form-control" ngDefaultControl [(ngModel)]="productMrp">
+    </div>
+    <div class="col-4 inputSpaceBtm">
+        <label for="prodDis">Product Discount Price</label>
+        <input type="text" id="prodDis" name="prodDiscount" class="form-control" ngDefaultControl [(ngModel)]="productDiscount">
+    </div>
+    <div class="col-2 inputSpaceBtm">
+        <label for="customSwitch1">Deal Of The Day</label>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="deal" name="deal" class="custom-control-input" [(ngModel)]="isDeal" id="customSwitch1">
+            <label class="custom-control-label" for="customSwitch1" ngDefaultControl ></label>
+        </div>
+
+    </div>
+    <div class="col-2 inputSpaceBtm">
+        <label for="customSwitch2">Free Delivery</label>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="free" class="custom-control-input" ngDefaultControl [(ngModel)]="isFreeDelivery" id="customSwitch2">
+            <label class="custom-control-label" for="customSwitch2"></label>
+        </div>
+    
+    </div>
+    <div class="col-2 inputSpaceBtm">
+        <label for="customSwitch3">No EMI</label>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="emi" class="custom-control-input" ngDefaultControl [(ngModel)]="isEmi" id="customSwitch3">
+            <label class="custom-control-label" for="customSwitch3"></label>
+        </div>
+    
+    </div>
+    <div class="col-4 inputSpaceBtm">
+        <label for="prodDes">Thumbnail Image</label>
+    <div class="custom-file">
+        <input type="file" name="url" class="custom-file-input" id="customFile" (change)="upload($event)">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+    </div>
+    </div>
+    <div class="col-3">
+        <img src="" style="width: inherit;" alt="" id="imgUrlSet">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col" style="text-align: end;">
+        <button class="btn btn-success" (click)="addProduct()">Submit</button>
+    </div>
+
+</div>

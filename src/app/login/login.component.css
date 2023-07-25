@@ -1,0 +1,18 @@
+.welcome{
+    font-size: 20px;
+    font-weight: 700;
+}
+.userNameCol{
+    color: #7e7e7e;
+}
+.cardShadow{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.hyperLink{
+    color: #5151eb !important;
+    cursor: pointer;
+}
+.hyperLink :hover{
+    text-decoration: underline !important;
+
+}
