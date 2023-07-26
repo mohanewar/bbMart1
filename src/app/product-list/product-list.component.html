@@ -11,9 +11,8 @@
 </div>
 
 <div *ngFor="let item of productList" class="row" style="    border-radius: 4px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;margin-bottom: 10px;
-">
-    <div class="col">style
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;margin-bottom: 10px;">
+    <div class="col">
         <div >
             <div class="row">
                 <div class="col-2" style="background: #f4f4f4;">
@@ -31,7 +30,7 @@
                         <i (click)="editProduct(item)" class="fas fa-pen" style="color: rgb(2, 2, 186);"></i>
                     </div>
                     <div class="iconHeight">
-                        <i class="fas fa-trash" style="color: rgb(186, 2, 2);"></i>
+                        <i (click)="deleteProduct(item.unique_id)" class="fas fa-trash" style="color: rgb(186, 2, 2);"></i>
                     </div>
 
                 </div>

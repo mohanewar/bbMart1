@@ -45,4 +45,18 @@ export class ServerapiService {
       responseType: 'json'
     });
   }
+  updateProducts(model:any):Observable<any>{
+    let httpHeaders=new HttpHeaders().set('content-type','application/json')
+    return this.http.post(this.apiUrl + 'updateProducts',model,{
+      headers:httpHeaders,
+      responseType:'json'
+    })
+  }
+  deleteProduct(uniqueId: any): Observable<any> {
+    let httpHeaders = new HttpHeaders().set('content-type', 'application/json')
+    return this.http.post(this.apiUrl + 'deleteProduct', uniqueId, {
+      headers: httpHeaders,
+      responseType: 'json'
+    })
+  }
 }

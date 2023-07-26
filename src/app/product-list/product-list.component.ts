@@ -3,6 +3,7 @@ import { ServerapiService } from '../services/serverapi.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminUploadPageComponent } from '../admin/admin-upload-page/admin-upload-page.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private api: ServerapiService, public dialog: MatDialog ) { }
+  
+  constructor(private api: ServerapiService, public dialog: MatDialog,private sanitizer:DomSanitizer ) { }
   @Input() prodtype:any;
   @Input() fromPage:any;
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class ProductListComponent implements OnInit {
            roundOff = ((this.productList[i].product_mrp - this.productList[i].discount_price) / this.productList[i].product_mrp) * 100
           this.productList[i].off = Math.round(roundOff)
           this.productList[i].url = JSON.parse(this.productList[i].thumbnail_url);
+          // this.sanitizer.bypassSecurityTrustResourceUrl(this.rowData.url);
 
 
         }
@@ -65,5 +68,28 @@ export class ProductListComponent implements OnInit {
       }
     });
   
+  }
+  deleteProduct(uniqueId:any){
+    let obj={
+      uniqueId: uniqueId
+    }
+    this.api.deleteProduct(obj).subscribe(res=>{
+      if(res.status==200){
+
+        this.getProductList();
+      }else{
+        console.log(res.reason)
+      }
+    },(err:HttpErrorResponse)=>{
+      if(err.error  instanceof Error){
+        // A client-side or network error occurred.
+        console.log('An error occurred:' + err.error.message, 'Error!');
+      }else{
+        // Backend returns unsuccessful response codes such as 404, 500 etc.
+        console.log('An error occurred:' + err.error.message, 'Error!');
+        console.log('Response body:', err.error);
+
+      }
+    })
   }
 }

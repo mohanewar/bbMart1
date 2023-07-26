@@ -13,6 +13,10 @@
 </div>
 <hr> -->
 <div class="row">
+
+    <div class="col-12" *ngIf="isPopup">
+        <h2>Edit Product</h2>
+    </div>
     <div class="col-4 inputSpaceBtm">
         <label for="prodName">Product Name</label>
         <input type="text" id="prodName" name="prodName" class="form-control" ngDefaultControl [(ngModel)]="productName">
@@ -61,14 +65,21 @@
     </div>
     </div>
     <div class="col-3">
-        <img src="" style="width: inherit;" alt="" id="imgUrlSet">
+        <img [src]="imageUrl" style="width: inherit;" alt="" id="imgUrlSet">
 
     </div>
 </div>
 
 <div class="row">
-    <div class="col" style="text-align: end;">
+    <div class="col" style="text-align: end;" *ngIf="isPopup">
+        <button class="btn btn-danger" (click)="closePop()">Close</button>
+    </div>
+    <div class="col" *ngIf="!isPopup"></div>
+    <div class="col-1.5" style="text-align: end;" *ngIf="!isPopup">
         <button class="btn btn-success" (click)="addProduct()">Submit</button>
+    </div>
+    <div class="col-1.5" style="text-align: end;" *ngIf="isPopup">
+        <button class="btn btn-success" (click)="updateProduct()">Submit</button>
     </div>
 
 </div>

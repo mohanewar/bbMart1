@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ServerapiService } from 'src/app/services/serverapi.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-admin-upload-page',
   templateUrl: './admin-upload-page.component.html',
@@ -10,14 +10,29 @@ import { ServerapiService } from 'src/app/services/serverapi.service';
 })
 export class AdminUploadPageComponent implements OnInit {
 
-  constructor(private api: ServerapiService, private dialogRef: MatDialogRef<AdminUploadPageComponent>, @Inject(MAT_DIALOG_DATA) private data: any,) { }
+  constructor(private api: ServerapiService, private sanitizer: DomSanitizer, private dialogRef: MatDialogRef<AdminUploadPageComponent>, @Inject(MAT_DIALOG_DATA) private data: any,) { }
   productName:any;
   productDescription:any;
   productMrp:any;
   productDiscount:any;
   isDod:any;
+  isPopup=false;
+  rowData:any
   ngOnInit(): void {
-    console.log("edit data:",this.data)
+    console.log("edit data:",this.data);
+    if (this.data?.isFrom=='edit'){
+      this.isPopup=true;
+     this.rowData = this.data.data
+      this.productName = this.rowData.product_name
+        this.productDescription = this.rowData.product_description
+      this.productMrp = this.rowData.product_mrp
+        this.productDiscount = this.rowData.discount_price
+      this.isDeal = this.rowData.is_deal
+      this.isFreeDelivery = this.rowData.is_free_delivery
+      this.isEmi = this.rowData.is_no_emi
+      this.imageUrl = this.rowData.url;
+   
+    }
   }
   files:any;
   uploadImg(e:any){
@@ -78,7 +93,8 @@ discount: this.productDiscount,
 isDeal: this.isDeal,
 isFreeDelivery: this.isFreeDelivery,
 isEmi: this.isEmi,
-      imageUrl: JSON.stringify(this.imageUrl) 
+      imageUrl: JSON.stringify(this.imageUrl),
+      rowStatus:1
     }
     this.api.uploadProducts(model).subscribe(res => {
       if(res.status==200){
@@ -102,6 +118,38 @@ isEmi: this.isEmi,
           console.log('An error occurred:' + err.error.message, 'Error!');
 
         }
+      }
+    })
+  }
+  closePop(){
+    this.dialogRef.close();
+  }
+  updateProduct(){
+    let obj={
+      product_name:this.productName,
+product_description:this.productDescription,
+product_mrp:this.productMrp,
+discount_price:this.productDiscount,
+is_deal:this.isDeal,
+is_free_delivery:this.isFreeDelivery,
+is_no_emi:this.isEmi, 
+      thumbnail_url: JSON.stringify(this.imageUrl),
+      unique_id:this.rowData.unique_id
+
+    }
+    this.api.updateProducts(obj).subscribe(res=>{
+      if (res.status == 200) {
+        window.alert("Added successfully")
+      } else {
+        console.log(res.reason)
+      }
+
+    },(err:HttpErrorResponse)=>{
+      if(err.error instanceof Error){
+        console.log('An error occured :'+err.error.message,'error!')
+      }else{
+        console.log('An error occurred:' + err.error.message, 'Error!');
+
       }
     })
   }
