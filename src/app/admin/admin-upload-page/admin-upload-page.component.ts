@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ServerapiService } from 'src/app/services/serverapi.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommonServiceService } from 'src/app/common-service.service';
 @Component({
   selector: 'app-admin-upload-page',
   templateUrl: './admin-upload-page.component.html',
@@ -10,7 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AdminUploadPageComponent implements OnInit {
 
-  constructor(private api: ServerapiService, private sanitizer: DomSanitizer, private dialogRef: MatDialogRef<AdminUploadPageComponent>, @Inject(MAT_DIALOG_DATA) private data: any,) { }
+  constructor(private api: ServerapiService, private sanitizer: DomSanitizer, private commonService:CommonServiceService,
+    private dialogRef: MatDialogRef<AdminUploadPageComponent>, @Inject(MAT_DIALOG_DATA) private data: any,) { }
   productName:any;
   productDescription:any;
   productMrp:any;
@@ -139,7 +141,9 @@ is_no_emi:this.isEmi,
     }
     this.api.updateProducts(obj).subscribe(res=>{
       if (res.status == 200) {
-        window.alert("Added successfully")
+        this.closePop();
+        window.alert("Updated successfully");
+        this.commonService.notifyRefresh({ value: 'adminUploadPage' });
       } else {
         console.log(res.reason)
       }

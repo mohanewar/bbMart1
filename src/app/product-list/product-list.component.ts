@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AdminUploadPageComponent } from '../admin/admin-upload-page/admin-upload-page.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommonServiceService } from '../common-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,12 +13,19 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ProductListComponent implements OnInit {
 
-  
-  constructor(private api: ServerapiService, public dialog: MatDialog,private sanitizer:DomSanitizer ) { }
+  subscription:any;
+  constructor(private api: ServerapiService, public dialog: MatDialog, private commonService:CommonServiceService,
+    private sanitizer:DomSanitizer ) { }
   @Input() prodtype:any;
   @Input() fromPage:any;
   ngOnInit(): void {
     this.getProductList();
+    this.subscription = this.commonService.notifyRefreshObservable$.subscribe((res) => {
+      if (res.hasOwnProperty('value') && res.value === 'adminUploadPage') {
+        this.getProductList();
+      }
+
+    });
    
   }
   productList:any;
@@ -91,5 +99,9 @@ export class ProductListComponent implements OnInit {
 
       }
     })
+  }
+
+  refresh(){
+    this.getProductList();
   }
 }

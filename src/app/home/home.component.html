@@ -170,5 +170,8 @@
 
 <div class="row" *ngIf="isViewProd" style="    width: 95%;
     margin: auto;    margin-top: 20px;">
-    <app-product-list [prodtype]="passViewName" [fromPage]="pagename" ></app-product-list>
+    <div class="col-12">
+    <app-product-list [prodtype]="passViewName" [fromPage]="pagename"></app-product-list>
+
+    </div>
 </div>
