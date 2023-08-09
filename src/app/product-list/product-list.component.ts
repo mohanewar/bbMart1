@@ -12,7 +12,7 @@ import { CommonServiceService } from '../common-service.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
+  p: number = 1;
   subscription:any;
   constructor(private api: ServerapiService, public dialog: MatDialog, private commonService:CommonServiceService,
     private sanitizer:DomSanitizer ) { }

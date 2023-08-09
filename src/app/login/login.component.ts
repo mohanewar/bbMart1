@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ServerapiService } from '../services/serverapi.service';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { ServerapiService } from '../services/serverapi.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private route: Router,private api:ServerapiService) { }
+  constructor(private route: Router,private api:ServerapiService,private authService:AuthService) { }
   isForget=false;
   otpSec=0
   otpCounter:any;
@@ -107,6 +108,13 @@ export class LoginComponent implements OnInit {
 
       }
     }))
+  }
+  loginWithGoogle(){
+    this.authService.signInWithGoogle().then((res:any)=>{
+      this.route.navigateByUrl('home')
+    }).catch((error:any)=>{
+      console.log(error);
+    })
   }
   ngOnDestroy(){
     clearInterval(this.otpCounter);

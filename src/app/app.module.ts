@@ -19,7 +19,8 @@ import { AdminMainComponent } from './admin-main/admin-main.component';
 import { AdminProductListComponent } from './admin-product-list/admin-product-list.component';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 const appRoute : Routes=[
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -44,7 +45,7 @@ const appRoute : Routes=[
     // ProductListComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, NgxPaginationModule, AngularFireAuthModule,
     AppRoutingModule, FormsModule, HttpClientModule, MatDialogModule, BrowserAnimationsModule,
     RouterModule.forRoot(appRoute), ProductModule, AngularFireModule.initializeApp(environment.firebase)
     // AngularFontAwesomeModule

@@ -52,6 +52,10 @@
                 <span style="color: #7e7e7e;">Already you have an account? <span (click)="loginUser()"
                         style="cursor: pointer; text-decoration: underline;color: rgb(10, 10, 227);">Login</span> </span>
             </div>
+            <div *ngIf="isSignUp" class="col" style="text-align: center;" (click)="loginWithGoogle()">
+                <span style="color: #7e7e7e;"><span 
+                        style="cursor: pointer; text-decoration: underline;color: rgb(10, 10, 227);">Sign in With Google</span> </span>
+            </div>
              
         </div>
 

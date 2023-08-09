@@ -12,15 +12,7 @@
 
 <div class="row">
     <div class="col-10">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav> 
+    <pagination-controls (pageChange)="p = $event" ></pagination-controls>
     </div>
     <div class="col" style="text-align: end;">
         <button class="btn btn-sm btn-primary" (click)="refresh()"><i class="fas fa-refresh"></i></button>
@@ -28,7 +20,7 @@
 
 </div>
 <div class="scrollList">
-<div *ngFor="let item of productList" class="row" style="    border-radius: 4px;
+<div *ngFor="let item of productList |paginate: { itemsPerPage: 3, currentPage: p }" class="row" style="    border-radius: 4px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;margin-bottom: 10px;">
     <div class="col-12">
 
