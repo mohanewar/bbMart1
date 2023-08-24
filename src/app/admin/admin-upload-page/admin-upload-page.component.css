@@ -60,3 +60,10 @@ input:checked + .slider:before {
 .inputSpaceBtm{
         margin-bottom: 10px;
 }
+
+.form-control.ng-touched.ng-invalid{
+  border-color: red !important;
+}
+.errorTxt{
+  color:red;
+}

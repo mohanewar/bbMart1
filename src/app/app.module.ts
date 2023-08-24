@@ -21,12 +21,16 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { numberValidation } from './directives/numberValidation.directive';
+import { ForgetPassComponent } from './forget-pass/forget-pass.component'
 const appRoute : Routes=[
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'adminMain', component: AdminMainComponent },
   { path: 'adminProductList', component: AdminProductListComponent },
   { path: 'adminUpload', component: AdminUploadPageComponent },
+  { path: 'forgetpass', component: ForgetPassComponent },
+
 
 
 
@@ -42,12 +46,23 @@ const appRoute : Routes=[
     AdminUploadPageComponent,
     AdminMainComponent,
     AdminProductListComponent,
+    numberValidation,
+    ForgetPassComponent
     // ProductListComponent
   ],
   imports: [
     BrowserModule, NgxPaginationModule, AngularFireAuthModule,
     AppRoutingModule, FormsModule, HttpClientModule, MatDialogModule, BrowserAnimationsModule,
-    RouterModule.forRoot(appRoute), ProductModule, AngularFireModule.initializeApp(environment.firebase)
+    RouterModule.forRoot(appRoute), ProductModule, 
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyB7R-1fgBrEfhE6z7r8xv1xaHdkFth-rCc",
+      authDomain: "bbmart-bdd8f.firebaseapp.com",
+      projectId: "bbmart-bdd8f",
+      storageBucket: "bbmart-bdd8f.appspot.com",
+      messagingSenderId: "541226734907",
+      appId: "1:541226734907:web:4787f45e6a1b9757a0931e",
+      measurementId: "G-K7M372DRDR"
+    })
     // AngularFontAwesomeModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],

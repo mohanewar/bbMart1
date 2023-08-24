@@ -1,22 +1,51 @@
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth'
+import { Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+isLoggedIn=false;
+  constructor(private firebaseAuth: AngularFireAuth, private route: Router) { }
 
-  constructor(private fireauth:AngularFireAuth) { }
+  async signin(email: string, password: string) {
+    await this.firebaseAuth.signInWithEmailAndPassword(email, password).
+      then(res => {
+        this.isLoggedIn= true;
+        localStorage.setItem('user', JSON.stringify(res.user))
+      })
+  }
+  async signup(email: string, password: string) {
+    await this.firebaseAuth.createUserWithEmailAndPassword(email, password).
+      then(res => {
+        this.isLoggedIn = true;
+        localStorage.setItem('user', JSON.stringify(res.user))
+      })
+  }
+  async forgetPassword(email: string) {
+    await this.firebaseAuth.sendPasswordResetEmail(email).
+      then(res => {
+        // this.isLoggedIn = true;
 
-  signInWithGoogle(){
-    return this.fireauth.signInWithPopup(new GoogleAuthProvider());
+      })
   }
-  registerWithEmailAndPassword(user:{email:string,password:string}){
-    return this.fireauth.createUserWithEmailAndPassword(user.email,user.password);
+  async resetPassword(code:string, newPassword:string) {
+    await this.firebaseAuth.confirmPasswordReset(code,newPassword).
+      then(res => {
+        // this.isLoggedIn = true;
+        this.route.navigateByUrl("/login/login");
+
+        
+
+      },(err)=>{
+        console.log(err);
+      })
   }
-  signInWithEmailAndPAssword(user:{email:string,password:string}){
-    return this.fireauth.signInWithEmailAndPassword(user.email,user.password);
+  logout() {
+    this.firebaseAuth.signOut()
+    localStorage.removeItem('user')
   }
 }
 

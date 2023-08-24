@@ -1,0 +1,26 @@
+
+<div class="row" style="width: 25%;
+    margin: auto;
+    margin-top: calc(100vh - 50vh);">
+  
+    <ng-container >
+        <div class="card cardShadow" style="padding: 20px;">
+            <div class="row">
+
+            
+            <div class="col-12">
+                <span class="userNameCol">Enter New Password</span>
+            </div>
+            <div class="col-12">
+                <input type="password" class="form-control" [(ngModel)]="newPassword">
+            </div>
+            <div class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
+                <button class="btn btn-primary" (click)="resetPassword()" (window:keypress)="enterLog($event)">Submit</button>
+            </div>
+            </div>
+        </div>
+        
+    </ng-container>
+ 
+
+</div>

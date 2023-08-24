@@ -15,7 +15,14 @@ export class LoginComponent implements OnInit {
   otpSec=0
   otpCounter:any;
   userName:any;
+  isSignedIn=false;
   ngOnInit(): void {
+    if (localStorage.getItem('user') !== null) {
+      this.isSignedIn = true;
+
+    } else {
+      this.isSignedIn = false;
+    }
   }
   otpTimer(){
     this.otpSec=10;
@@ -73,9 +80,11 @@ export class LoginComponent implements OnInit {
   }
   enterLog(event:any){
     if (event.keyCode === 13 && !this.isSignUp) {
-      this.login();
+      // this.login();
+      this.onSignin(this.email,this.password);
     } else if (event.keyCode === 13 && this.isSignUp) {
-      this.signUpNewUser();
+      // this.signUpNewUser();
+      this.onSignup(this.email, this.password)
     }
   }
   isSignUp=false;
@@ -110,13 +119,35 @@ export class LoginComponent implements OnInit {
     }))
   }
   loginWithGoogle(){
-    this.authService.signInWithGoogle().then((res:any)=>{
-      this.route.navigateByUrl('home')
-    }).catch((error:any)=>{
-      console.log(error);
-    })
+    // this.authService.signInWithGoogle().then((res:any)=>{
+    //   this.route.navigateByUrl('home')
+    // }).catch((error:any)=>{
+    //   console.log(error);
+    // })
   }
   ngOnDestroy(){
     clearInterval(this.otpCounter);
 }
+
+  async onSignup(email: string, password: string) {
+    await this.authService.signup(email, password)
+    if (this.authService.isLoggedIn)
+      this.isSignedIn = true;
+    this.signUpNewUser();
+
+  }
+  async onSignin(email: string, password: string) {
+    await this.authService.signin(email, password)
+    if (this.authService.isLoggedIn)
+      this.isSignedIn = true;
+    this.login();
+
+  }
+  async forgetPassword(email: string) {
+    await this.authService.forgetPassword(email)
+    // if (this.firebaseService.isLoggedIn)
+    //   this.isSignedIn = true;
+    console.log("forget", email)
+
+  }
 }

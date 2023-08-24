@@ -1,24 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ServerapiService } from '../services/serverapi.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminUploadPageComponent } from '../admin/admin-upload-page/admin-upload-page.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonServiceService } from '../common-service.service';
+import { HomeComponent } from '../home/home.component';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit , AfterViewInit {
   p: number = 1;
   subscription:any;
   constructor(private api: ServerapiService, public dialog: MatDialog, private commonService:CommonServiceService,
-    private sanitizer:DomSanitizer ) { }
+    private sanitizer: DomSanitizer, private changeDetectorRef: ChangeDetectorRef ) { }
   @Input() prodtype:any;
   @Input() fromPage:any;
+  @Output() notifyEvent = new EventEmitter();
+  @ViewChild(HomeComponent, {static: true}) home?:HomeComponent;
+  test$ = interval(1000);
+  testSub: Subscription | undefined;
   ngOnInit(): void {
+    this.testSub = this.test$.subscribe((res:any) => {
+      console.log(1)
+    })
     this.getProductList();
     this.subscription = this.commonService.notifyRefreshObservable$.subscribe((res) => {
       if (res.hasOwnProperty('value') && res.value === 'adminUploadPage') {
@@ -27,6 +36,9 @@ export class ProductListComponent implements OnInit {
 
     });
    
+  }
+  ngAfterViewInit(){
+    this.home?.viewChildFuction(1);
   }
   productList:any;
   getProductList(){
@@ -102,6 +114,14 @@ export class ProductListComponent implements OnInit {
   }
 
   refresh(){
+    // this.notifyEvent.emit('test')
     this.getProductList();
+  }
+  homeComponentTriger(data:any){
+    this.changeDetectorRef.detectChanges();
+    this.home?.viewChildFuction(data);
+  }
+  ngOnDestroy() {
+    this.testSub?.unsubscribe();
   }
 }

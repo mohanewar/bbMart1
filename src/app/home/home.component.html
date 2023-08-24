@@ -39,11 +39,12 @@
                 <span *ngIf="showUserName">welcome, {{userAfterLogin}}</span>
                     </a>
             </div>
-            <div class="col colCenter" *ngIf="showUserName" style="cursor: pointer;" (click)="loginUser()">
+            <div class="col colCenter" *ngIf="showUserName" style="cursor: pointer;" (click)="logout()">
                 <i  class="fas fa-up-right-from-square" style="    padding-right: 5px;"></i> Sign out?
             </div>
             <div class="col colCenter" style="cursor: pointer;justify-content: right;">
                 <span> <i style="font-size: 20px;" class="fas fa-cart-shopping"></i> </span>
+                <h1>{{count}}</h1>
 
             </div>
         </div>
@@ -171,7 +172,8 @@
 <div class="row" *ngIf="isViewProd" style="    width: 95%;
     margin: auto;    margin-top: 20px;">
     <div class="col-12">
-    <app-product-list [prodtype]="passViewName" [fromPage]="pagename"></app-product-list>
+    <app-product-list [prodtype]="passViewName" [fromPage]="pagename" (notifyEvent)="notifyEvent($event)"></app-product-list>
 
     </div>
 </div>
+

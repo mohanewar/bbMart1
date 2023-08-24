@@ -14,7 +14,7 @@
             </div>
             
             <div class="col-12">
-                <input type="text" class="form-control" [(ngModel)]="email">
+                <input type="text" class="form-control" #emailSignup [(ngModel)]="email">
             </div>
             <div class="col-12" *ngIf="isSignUp">
                 <span class="userNameCol">User Name</span>
@@ -27,7 +27,7 @@
                 <span class="userNameCol">Password</span>
             </div>
             <div class="col-12">
-                <input type="password" class="form-control" [(ngModel)]="password">
+                <input type="password" class="form-control" #passwordSignup [(ngModel)]="password">
                 <span *ngIf="!isSignUp" (click)="forgotPass()" class="hyperLink">Forgot password</span>
             </div>
             <ng-container *ngIf="isSignUp" >
@@ -38,12 +38,12 @@
                     <input type="password" class="form-control" [(ngModel)]="confirmPassword">
                 </div>
                 <div class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
-                    <button class="btn btn-primary" (click)="signUpNewUser()" (window:keypress)="enterLog($event)">Sign up</button>
+                    <button class="btn btn-primary" (click)="onSignup(emailSignup.value,passwordSignup.value)" (window:keypress)="enterLog($event)">Sign up</button>
                 </div>
             </ng-container>
             
             <div *ngIf="!isSignUp" class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
-               <button class="btn btn-primary" (click)="login()" (window:keypress)="enterLog($event)">Login</button>
+               <button class="btn btn-primary" (click)="onSignin(emailSignup.value,passwordSignup.value)" (window:keypress)="enterLog($event)">Login</button>
             </div>
             <div *ngIf="!isSignUp" class="col" style="text-align: center;">
                 <span style="color: #7e7e7e;">You don't have an account? <span (click)="signUpWindow()" style="cursor: pointer; text-decoration: underline;color: rgb(10, 10, 227);">SignUp</span> </span>
@@ -77,11 +77,11 @@
                 <span class="userNameCol">Email</span>
             </div>
             <div class="col-12">
-                <input type="text" class="form-control" [(ngModel)]="email" >
+                <input type="text" class="form-control" #forgetPassEmail [(ngModel)]="email" >
                 
 
             </div>
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <span class="userNameCol">OTP</span>
             </div>
             <div class="col-12">
@@ -92,6 +92,9 @@
             </div>
             <div class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
                 <button class="btn btn-primary" (click)="submitOtp()" >Submit OTP</button>
+            </div> -->
+            <div class="col-12" style="text-align: center;padding-top: 10px;    padding-bottom: 10px;">
+                <button class="btn btn-primary" (click)="forgetPassword(forgetPassEmail.value)">Send Link</button>
             </div>
             <div  class="col" style="text-align: center;">
                 <span ><span (click)="isForget=false"
@@ -102,3 +105,5 @@
 
     </div>
 </div>
+
+<div id="sign-in-button"></div>

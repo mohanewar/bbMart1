@@ -12,6 +12,7 @@
     </div>
 </div>
 <hr> -->
+<form #uploadForm="ngForm">
 <div class="row">
 
     <div class="col-12" *ngIf="isPopup">
@@ -19,19 +20,24 @@
     </div>
     <div class="col-4 inputSpaceBtm">
         <label for="prodName">Product Name</label>
-        <input type="text" id="prodName" name="prodName" class="form-control" ngDefaultControl [(ngModel)]="productName">
+        <input type="text" id="prodName" name="prodName" #prodName="ngModel" class="form-control" required ngDefaultControl [(ngModel)]="productName">
+        <span class="help-block" class="errorTxt"  *ngIf="!prodName.valid && prodName.touched">Enter valid Product Name</span>
     </div>
     <div class="col-4 inputSpaceBtm">
-        <label for="prodDes">Product Describtion</label>
-        <input type="text" id="prodDes" name="prodDis" class="form-control" ngDefaultControl [(ngModel)]="productDescription">
+        <label for="prodDes">Product Description</label>
+        <input type="text" id="prodDes" name="prodDis" #prodDes="ngModel" class="form-control" required ngDefaultControl [(ngModel)]="productDescription">
+        <span class="help-block" class="errorTxt" *ngIf="!prodDes.valid && prodDes.touched">Enter valid Product Description</span>
     </div>
     <div class="col-4 inputSpaceBtm">
         <label for="prodMrp">Product MRP</label>
-        <input type="text" id="prodMrp" name="prodMrp" class="form-control" ngDefaultControl [(ngModel)]="productMrp">
+        <input type="text" id="prodMrp" name="prodMrp" #prodMrp="ngModel" numberValidation
+         class="form-control" required ngDefaultControl [(ngModel)]="productMrp">
+        <span class="help-block" class="errorTxt" *ngIf="!prodMrp.valid && prodMrp.touched">Enter valid Product
+            MRP</span>
     </div>
     <div class="col-4 inputSpaceBtm">
         <label for="prodDis">Product Discount Price</label>
-        <input type="text" id="prodDis" name="prodDiscount" class="form-control" ngDefaultControl [(ngModel)]="productDiscount">
+        <input type="text" id="prodDis" name="prodDiscount" class="form-control" numberValidation ngDefaultControl [(ngModel)]="productDiscount">
     </div>
     <div class="col-2 inputSpaceBtm">
         <label for="customSwitch1">Deal Of The Day</label>
@@ -69,17 +75,17 @@
 
     </div>
 </div>
-
+</form>
 <div class="row">
     <div class="col" style="text-align: end;" *ngIf="isPopup">
         <button class="btn btn-danger" (click)="closePop()">Close</button>
     </div>
     <div class="col" *ngIf="!isPopup"></div>
     <div class="col-1.5" style="text-align: end;" *ngIf="!isPopup">
-        <button class="btn btn-success" (click)="addProduct()">Submit</button>
+        <button [disabled]="!uploadForm.valid" class="btn btn-success" (click)="addProduct(uploadForm.value)">Submit</button>
     </div>
     <div class="col-1.5" style="text-align: end;" *ngIf="isPopup">
-        <button class="btn btn-success" (click)="updateProduct()">Submit</button>
+        <button [disabled]="!uploadForm.valid" class="btn btn-success" (click)="updateProduct()">Submit</button>
     </div>
 
 </div>

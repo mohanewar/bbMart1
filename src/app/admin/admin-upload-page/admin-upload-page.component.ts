@@ -85,7 +85,9 @@ export class AdminUploadPageComponent implements OnInit {
   isFreeDelivery:any;
   isEmi:any;
   imageUrl:any;
-  addProduct() {
+  addProduct(uploadForm:any) {
+    console.log(uploadForm);
+    // return;
     let dis = { description: this.productDescription };
     let model = {
       name: this.productName,
