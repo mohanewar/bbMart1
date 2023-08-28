@@ -5,7 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {  RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule } from '@angular/forms';
@@ -23,13 +23,36 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { numberValidation } from './directives/numberValidation.directive';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component'
-const appRoute : Routes=[
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'adminMain', component: AdminMainComponent },
-  { path: 'adminProductList', component: AdminProductListComponent },
-  { path: 'adminUpload', component: AdminUploadPageComponent },
-  { path: 'forgetpass', component: ForgetPassComponent },
+import { AuthGuardGuard } from './core/guards/auth-guard.guard';
+const appRoute: Routes = [
+  {
+    path: '', component: HomeComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'home', component: HomeComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'adminMain', component: AdminMainComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'adminProductList', component: AdminProductListComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'adminUpload', component: AdminUploadPageComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'forgetpass', component: ForgetPassComponent,
+    // canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  }
 
 
 
@@ -53,7 +76,7 @@ const appRoute : Routes=[
   imports: [
     BrowserModule, NgxPaginationModule, AngularFireAuthModule,
     AppRoutingModule, FormsModule, HttpClientModule, MatDialogModule, BrowserAnimationsModule,
-    RouterModule.forRoot(appRoute), ProductModule, 
+    RouterModule.forRoot(appRoute), ProductModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyB7R-1fgBrEfhE6z7r8xv1xaHdkFth-rCc",
       authDomain: "bbmart-bdd8f.firebaseapp.com",
@@ -65,7 +88,7 @@ const appRoute : Routes=[
     })
     // AngularFontAwesomeModule
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
       provide: MatDialogRef,
